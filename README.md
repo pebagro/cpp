@@ -8,3 +8,5 @@ W programach mogą się zdarzyć dodane headery/.cpp ze względu na nature komip
 Dodatek który może blokować kompilacje to 'Better Comments' - wstawki typu //! //* to komentarze
 
 W paru zadaniach return jest poza pętlą, MinGW w naturze ma ostrzeganie przed nieskończonymi 'if'-ami, środek podjęty dla czystości kompilacji w VSc
+
+ID. 41330
