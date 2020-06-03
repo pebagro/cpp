@@ -1,66 +1,84 @@
-#include "complex.h"
+#include "Complex.h"
 #include <iostream>
+#include <math.h>
 using namespace std;
 
-complex::complex()
+Complex::Complex()
 {
-	this->re = 0;
-	this->im = 0;
+	this->Re = 0;
+	this->Im = 0;
 }
 
-complex::complex(double re, double im)
+Complex::Complex(double Re, double Im)
 {
-	this->re = re;
-	this->im = im;
+	this->Re = Re;
+	this->Im = Im;
 }
 
-void complex::print()
+void Complex::Print()
 {
-	cout <<endl<< re << "+" << im << "i\n"<<endl;
+	cout<<Re<<"+"<<Im<<"i\n";
 }
 
-ostream& operator<<(ostream& out, complex& w)
+ostream& operator<<(ostream& out, Complex& q)
 {
-	out << "(" << w.re << "," << w.im << "i)" << endl;
+	out << "(" << q.Re << ", " << q.Im << "i)\n" << endl;
 	return out;
 }
 
-complex operator-(const complex&a, const complex &b)
+istream& operator>>(istream &in, Complex& q)
+{
+	in >> q.Re,q.Im;
+	return in;
+}
+
+Complex operator-(const Complex&a, const Complex &b)
 {	
-	complex wyn;
-	wyn.re = a.re-b.re;
-	wyn.im = a.im-b.im;
+	Complex wyn;
+	wyn.Re = a.Re-b.Re;
+	wyn.Im = a.Im-b.Im;
 	return wyn;
 }
 
-complex operator+(const complex&a, const complex&b)
+Complex operator+(const Complex&a, const Complex&b)
 {
-	complex wyn;
-	wyn.re = a.re+b.re;
-	wyn.im = a.im+b.im;
+	Complex wyn;
+	wyn.Re = a.Re+b.Re;
+	wyn.Im = a.Im+b.Im;
 	return wyn;
 }
 
-complex operator*(const complex&a, const complex&b)
+Complex operator*(const Complex&a, const Complex&b)
 {
-	complex wyn;
-	wyn.re = a.re*b.re;
-	wyn.im = a.im*b.im;
+	Complex wyn;
+	wyn.Re = (a.Re*b.Re) - (a.Im*b.Im);
+	wyn.Im = (a.Re*b.Im) + (b.Re*a.Re);
 	return wyn;
+	//(a.Re+a.Im)(b.Re+b.Im)=a.Re*b.Re+a.Re*b.Im+b.Rex+bdi2
+	//(a+bx)(c+dx)=ac+adx+bcx+bdx2
 }
 
-complex operator/(const complex&a, const complex&b)
+Complex operator/(const Complex&a, const Complex&b)
 {
-	complex wyn;
-	if (b.re == 0 && b.im == 0)
+	Complex wyn;
+	if (b.Re == 0 && b.Im == 0)
 	{ 
 		cout << "Dzielenie przez 0 - blad" << endl; 
 	}
 
-	if (b.re != 0 && b.im != 0) 
+	if (b.Re != 0 && b.Im != 0) 
 	{
-		wyn.re = a.re / b.re;
-		wyn.im = a.im / b.im;
+		wyn.Re = a.Re / b.Re;
+		wyn.Im = a.Im / b.Im;
 	}
-	return wyn;;
+	return wyn;
+}
+
+double Complex::Modul(const Complex&a, const Complex&b)
+{
+	double modul;
+
+	modul = sqrt(a.Re*b.Re+a.Im*b.Im);
+
+	return modul;
 }
